@@ -1,9 +1,15 @@
 import time
 from sklearn import svm
-from feature_split import df_data_train, df_data_test, df_labels_train, df_labels_test
+from preprocessing import df_data
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_fscore_support, f1_score, confusion_matrix, accuracy_score, \
     classification_report
 
+# Split data into train test set
+df_labels = df_data['action_type']
+df_data = df_data.drop('action_type', axis=1)
+df_data_train, df_data_test, df_labels_train, df_labels_test = train_test_split(df_data, df_labels, test_size=0.7,
+                                                                                random_state=7)
 
 print('===  Linear  ===')
 start = time.time()
