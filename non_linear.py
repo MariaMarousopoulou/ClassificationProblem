@@ -1,16 +1,16 @@
 import time
 from sklearn import svm
-from sklearn.svm import SVR
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from feature_split import df_data_train, df_data_test, df_labels_train, df_labels_test
+from preprocessing import df_data
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_fscore_support, f1_score, confusion_matrix, accuracy_score, \
     classification_report
 
-'''
-model = Pipeline([('scaler', StandardScaler()),
-                  ('svr', SVR(kernel='linear'))])
-'''
+
+# Split data into train test set
+df_labels = df_data['action_type']
+df_data = df_data.drop('action_type', axis=1)
+df_data_train, df_data_test, df_labels_train, df_labels_test = train_test_split(df_data, df_labels, test_size=0.7,
+                                                                                random_state=7)
 
 print('===  Non Linear  ===')
 start = time.time()
